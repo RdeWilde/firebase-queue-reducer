@@ -1,0 +1,33 @@
+{
+  "name": "firebase-queue-reducer",
+  "version": "0.0.0",
+  "description": "tasks reducer wrapper for firebase-queue",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trialbee/firebase-queue-reducer.git"
+  },
+  "keywords": [
+    "firebase",
+    "queue",
+    "reducer",
+    "task",
+    "wrapper"
+  ],
+  "author": "Marco Pegoraro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trialbee/firebase-queue-reducer/issues"
+  },
+  "homepage": "https://github.com/trialbee/firebase-queue-reducer#readme",
+  "devDependencies": {
+    "firebase": "^2.3.1",
+    "node-random-name": "^1.0.1"
+  },
+  "dependencies": {
+    "firebase-queue": "^1.2.1"
+  }
+}
