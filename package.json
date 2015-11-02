@@ -4,7 +4,8 @@
   "description": "tasks reducer wrapper for firebase-queue",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "./node_modules/mocha/bin/mocha",
+    "start": "node ./examples/index"
   },
   "repository": {
     "type": "git",
@@ -24,8 +25,11 @@
   },
   "homepage": "https://github.com/trialbee/firebase-queue-reducer#readme",
   "devDependencies": {
+    "chai": "^3.4.0",
     "firebase": "^2.3.1",
-    "node-random-name": "^1.0.1"
+    "mocha": "^2.3.3",
+    "node-random-name": "^1.0.1",
+    "sinon": "^1.17.2"
   },
   "dependencies": {
     "firebase-queue": "^1.2.1"
