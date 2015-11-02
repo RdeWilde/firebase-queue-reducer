@@ -1,23 +1,46 @@
 
 var Firebase = require('firebase');
-var fb = new Firebase('peg-dev.firebaseio.com');
-
-
-
+var fb = new Firebase('--YourFirebaseInstance--.firebaseio.com');
 
 /**
- * Reducer in action
+ * Reducer in Action
  */
 
-var FirebaseQueueReducer = require('../index');
+var firebaseQueueReducer = require('../index');
 
-var reducer = new FirebaseQueueReducer({
-    from: fb.child('src'),
-    to: fb.child('dest')
+// this is the business logic you have to provide in order
+// to reduce a document. 
+//
+// it uses _promises_ so it can handle heavy asynchronous taks.
+function reducerCallback(originalDocument) {
+    return new Promise(function(resolve, reject) {
+        if (originalDocument.ctime % 2 === 0) {
+            resolve({
+                ctime: originalDocument.ctime,
+                fullName: [originalDocument.firstName, originalDocument.lastName].join(' ')
+            });
+        } else {
+            reject('it was not EVEN enough');
+        }
+    });
+}
+
+// setup the queue reducing structure
+var queue = firebaseQueueReducer({
+    source: fb.child('src'),
+    target: fb.child('dest'),
+    reducer: reducerCallback,
+    workers: 5
 });
 
-
-
+// gracefully shutdown to avoid data losses
+process.on('SIGINT', function() {
+    console.log('Gracefully start queue shutdown');
+    queue.shutdown().then(function() {
+        console.log('Finished queue shutdown');    
+        process.exit(0);
+    });
+});
 
 /**
  * Fake Data Generation
@@ -38,4 +61,4 @@ function pushFakeData(count) {
 }
 
 // comment the line below to avoid generate new data
-// pushFakeData();
+pushFakeData();
