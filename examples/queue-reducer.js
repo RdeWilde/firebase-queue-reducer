@@ -19,7 +19,6 @@ function reducerCallback(originalDocument) {
                 fullName: [originalDocument.firstName, originalDocument.lastName].join(' ')
             });
         } else {
-            
             if (Date.now() % 2 === 0) {
                 reject({
                     fixtureId: originalDocument.ctime,
