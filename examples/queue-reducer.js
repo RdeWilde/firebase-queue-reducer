@@ -1,6 +1,5 @@
 
-var Firebase = require('firebase');
-var fb = new Firebase('--YourFirebaseInstance--.firebaseio.com');
+var fb = require('./_firebase');
 
 /**
  * Reducer in Action
@@ -20,7 +19,15 @@ function reducerCallback(originalDocument) {
                 fullName: [originalDocument.firstName, originalDocument.lastName].join(' ')
             });
         } else {
-            reject('it was not EVEN enough');
+            
+            if (Date.now() % 2 === 0) {
+                reject({
+                    fixtureId: originalDocument.ctime,
+                    msg: 'it was not EVEN enough'
+                });
+            } else {
+                reject('simple error with no details');
+            }
         }
     });
 }
